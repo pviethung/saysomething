@@ -1,23 +1,40 @@
+import { getTodos } from '@/api/getTodos';
+import AuthGuard from '@/components/AuthGuard';
 import { Button } from '@/components/ui';
-import { Inter } from 'next/font/google';
+import { useAuth } from '@/hooks';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useEffect } from 'react';
-import io from 'socket.io-client';
 
-const inter = Inter({ subsets: ['latin'] });
 export default function Home() {
+  const { logIn, logOut, user } = useAuth();
+
   useEffect(() => {
-    fetch('/api/socket').finally(() => {
-      const socket = io();
-      debugger
-      socket.on('a user connected', () => {
-        console.log('a user connected');
+    if (user) {
+      getTodos().then((data) => {
+        console.log(data);
       });
-    });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    // fetch('/api/socket').finally(() => {
+    //   const socket = io();
+    //   debugger;
+    //   socket.on('a user connected', () => {
+    //     console.log('a user connected');
+    //   });
+    // });
   }, []);
 
-  
+  // const handleLogin = async () => {
+  //   const { data, error } = await signInWithGoogle();
+  //   console.log(data);
+  // };
+  // const handleLogout = async () => {
+  //   signout();
+  //   // await supabaseClient.auth.signOut();
+  // };
+
   return (
     <>
       <Head>
@@ -28,10 +45,10 @@ export default function Home() {
       </Head>
       <main>
         <div className="w-screen h-screen flex justify-center items-center">
-          <Link href={'/choose-room'}>
-            <Button>Login</Button>
-          </Link>
+          <Button onClick={() => logIn()}>Login</Button>
+          <Button onClick={() => logOut()}>Logout</Button>
         </div>
+        <AuthGuard>Logged In</AuthGuard>
       </main>
     </>
   );
