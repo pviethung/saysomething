@@ -4,6 +4,9 @@ import type { AppProps } from 'next/app';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider, Session } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
+import { Layout } from '@/components/layout';
+import { useAuthActions } from '@/store/auth';
+import { UserMetadata } from '@/interface';
 
 export default function MyApp({
   Component,
@@ -18,6 +21,8 @@ export default function MyApp({
     })
   );
 
+  const { setUser, removeUser } = useAuthActions();
+
   useEffect(() => {
     const {
       data: {
@@ -25,13 +30,15 @@ export default function MyApp({
       },
     } = supabaseClient.auth.onAuthStateChange((event, session) => {
       // TODO make ultils for save local
-      if (event === 'SIGNED_OUT') {
+      if (session === null) {
         localStorage.removeItem('jwt');
-      }
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        if (session?.access_token) {
-          localStorage.setItem('jwt', session.access_token);
-        }
+        removeUser();
+      } else {
+        localStorage.setItem('jwt', session.access_token);
+        setUser({
+          id: session.user.id,
+          user_metadata: session.user.user_metadata as UserMetadata,
+        });
       }
     });
 
@@ -45,7 +52,9 @@ export default function MyApp({
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
       <Toaster />
     </SessionContextProvider>
   );
