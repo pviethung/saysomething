@@ -1,1 +1,1 @@
-export const publicRoutes = ['/hello', '/login'];
+export const publicRoutes = ['/hello', '/auth/login'];

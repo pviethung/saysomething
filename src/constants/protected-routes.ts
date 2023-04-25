@@ -1,1 +1,1 @@
-export const protectedRoutes = ['/', '/logged-in'];
+export const protectedRoutes = ['/'];

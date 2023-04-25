@@ -1,3 +1,4 @@
+import { HomeContainer } from '@/components/containers';
 import Head from 'next/head';
 
 export default function Home() {
@@ -10,9 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="w-screen h-screen flex justify-center items-center">
-          Home
-        </div>
+        <HomeContainer />
       </main>
     </>
   );

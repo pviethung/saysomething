@@ -5,8 +5,9 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider, Session } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 import { Layout } from '@/components/layout';
-import { useAuthActions } from '@/store/auth';
+import { useAuthActions } from '@/store/authSlice';
 import { UserMetadata } from '@/interface';
+import { useRouter } from 'next/router';
 
 export default function MyApp({
   Component,
@@ -22,6 +23,9 @@ export default function MyApp({
   );
 
   const { setUser, removeUser } = useAuthActions();
+  const { pathname } = useRouter();
+
+  console.log(pathname);
 
   useEffect(() => {
     const {
@@ -45,6 +49,8 @@ export default function MyApp({
     return () => {
       unsubscribe();
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -52,9 +58,13 @@ export default function MyApp({
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <Layout>
+      {pathname !== '/_error' ? (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      ) : (
         <Component {...pageProps} />
-      </Layout>
+      )}
       <Toaster />
     </SessionContextProvider>
   );

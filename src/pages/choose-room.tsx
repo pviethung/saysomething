@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
   Input,
-  Label
+  Label,
 } from '@/components/ui';
 import { useToast } from '@/hooks/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -27,7 +27,7 @@ const ChooseRoomPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    watch: _,
     formState: { errors },
   } = useForm<RoomInputType>({
     resolver: zodResolver(roomInputsSchema),

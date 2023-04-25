@@ -1,4 +1,4 @@
-import { useLoginStatus } from '@/store/auth';
+import { useLoginStatus } from '@/store/authSlice';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -8,9 +8,9 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (isLogged === false) {
-      router.push('/login');
+      router.push('/auth/login');
     }
-  }, [isLogged]);
+  }, [isLogged, router]);
 
   if (!isLogged) return <></>;
 

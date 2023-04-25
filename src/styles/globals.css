@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .chat {
+    padding: 0 0.75rem;
+  }
+  .chat-bubble {
+    width: max-content;
+    position: relative;
+    overflow: unset;
+    @apply bg-slate-900;
+    @apply py-3 px-4;
+    @apply rounded-2xl;
+    @apply text-white;
+    @apply rounded-bl-none;
+  }
+  .chat-bubble::after {
+    grid-column-start: 2;
+    @apply bg-slate-900;
+    content: '';
+    position: absolute;
+    left: -0.75rem;
+    bottom: 0;
+    height: 0.75rem;
+    width: 0.75rem;
+    -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMycgaGVpZ2h0PSczJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxwYXRoIGZpbGw9J2JsYWNrJyBkPSdtIDAgMyBMIDMgMyBMIDMgMCBDIDMgMSAxIDMgMCAzJy8+PC9zdmc+);
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+  }
+}
