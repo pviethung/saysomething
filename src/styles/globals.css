@@ -5,7 +5,15 @@
 @layer components {
   .chat {
     padding: 0 0.75rem;
+    display: flex;
   }
+  .chat + .chat {
+    margin-top: 10px;
+  }
+  .chat.chat-end {
+    justify-content: flex-end;
+  }
+
   .chat-bubble {
     width: max-content;
     position: relative;
@@ -16,6 +24,11 @@
     @apply text-white;
     @apply rounded-bl-none;
   }
+  .chat.chat-end .chat-bubble {
+    @apply rounded-bl-2xl;
+    @apply rounded-br-none;
+  }
+
   .chat-bubble::after {
     grid-column-start: 2;
     @apply bg-slate-900;
@@ -29,5 +42,10 @@
     -webkit-mask-size: contain;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center;
+  }
+
+  .chat.chat-end .chat-bubble::after {
+    -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMycgaGVpZ2h0PSczJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxwYXRoIGZpbGw9J2JsYWNrJyBkPSdtIDAgMyBMIDEgMyBMIDMgMyBDIDIgMyAwIDEgMCAwJy8+PC9zdmc+);
+    left: 100%;
   }
 }

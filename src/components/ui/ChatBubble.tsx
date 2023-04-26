@@ -1,11 +1,17 @@
-import clsx from 'clsx';
+import clsx from "clsx";
 
-const ChatBubble = () => {
+interface Props {
+  content: string;
+  fromLoggedUser?: boolean;
+}
+
+const ChatBubble = ({ content, fromLoggedUser }: Props) => {
   return (
-    <div className="chat">
-      <div className={clsx('chat-bubble')}>
-        It was said that you would, destroy the Sith, not join them.
-      </div>
+    <div className={clsx("chat", { "chat-end": fromLoggedUser })}>
+      <div
+        dangerouslySetInnerHTML={{ __html: content }}
+        className={clsx("chat-bubble")}
+      />
     </div>
   );
 };

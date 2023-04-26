@@ -1,13 +1,16 @@
-import { Toaster } from '@/components/ui';
-import '@/styles/globals.css';
-import type { AppProps } from 'next/app';
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
-import { SessionContextProvider, Session } from '@supabase/auth-helpers-react';
-import { useEffect, useState } from 'react';
-import { Layout } from '@/components/layout';
-import { useAuthActions } from '@/store/authSlice';
-import { UserMetadata } from '@/interface';
-import { useRouter } from 'next/router';
+import "@/styles/globals.css";
+
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { Session, SessionContextProvider } from "@supabase/auth-helpers-react";
+import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
+import { Layout } from "@/components/layout";
+import { Toaster } from "@/components/ui";
+import { excludeLayoutRoutes } from "@/constants";
+import { UserMetadata } from "@/interface";
+import { useAuthActions } from "@/store/authSlice";
 
 export default function MyApp({
   Component,
@@ -25,8 +28,6 @@ export default function MyApp({
   const { setUser, removeUser } = useAuthActions();
   const { pathname } = useRouter();
 
-  console.log(pathname);
-
   useEffect(() => {
     const {
       data: {
@@ -35,10 +36,10 @@ export default function MyApp({
     } = supabaseClient.auth.onAuthStateChange((event, session) => {
       // TODO make ultils for save local
       if (session === null) {
-        localStorage.removeItem('jwt');
+        localStorage.removeItem("jwt");
         removeUser();
       } else {
-        localStorage.setItem('jwt', session.access_token);
+        localStorage.setItem("jwt", session.access_token);
         setUser({
           id: session.user.id,
           user_metadata: session.user.user_metadata as UserMetadata,
@@ -58,13 +59,14 @@ export default function MyApp({
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      {pathname !== '/_error' ? (
+      {excludeLayoutRoutes.includes(pathname) ? (
+        <Component {...pageProps} />
+      ) : (
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      ) : (
-        <Component {...pageProps} />
       )}
+
       <Toaster />
     </SessionContextProvider>
   );

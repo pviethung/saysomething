@@ -1,4 +1,6 @@
-import { Button } from '@/components/ui';
+import Link from "next/link";
+
+import { Button } from "@/components/ui";
 import {
   Card,
   CardContent,
@@ -6,8 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/Card';
-import Link from 'next/link';
+} from "@/components/ui/Card";
 
 interface Props {
   id: string;
@@ -29,8 +30,8 @@ const ChatRoomCard = ({ host, name, desc }: Props) => {
         </CardContent>
       )}
       <CardFooter>
-        <Link href={'/room/1'}>
-          <Button size={'full'}>{`Let's chat`}</Button>
+        <Link href={"/roomss"}>
+          <Button size={"full"}>{`Let's chat`}</Button>
         </Link>
       </CardFooter>
     </Card>

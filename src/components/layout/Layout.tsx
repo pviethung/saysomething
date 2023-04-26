@@ -1,13 +1,15 @@
-import Auth from '@/components/Auth';
-import ChatRoomCard from '@/components/ChatRoomCard';
-import { Header } from '@/components/layout';
-import { protectedRoutes } from '@/constants';
-import { ScrollArea } from '@radix-ui/react-scroll-area';
-import { useRouter } from 'next/router';
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { useRouter } from "next/router";
+
+import Auth from "@/components/Auth";
+import ChatRoomCard from "@/components/ChatRoomCard";
+import { Header } from "@/components/layout";
+import { protectedRoutes } from "@/constants";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { pathname } = useRouter();
   let content = children;
+  const a = "a";
 
   if (protectedRoutes.includes(pathname)) {
     content = <Auth>{children}</Auth>;
@@ -24,42 +26,42 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 name="Hùng's room"
                 host="Hùng"
                 desc={`Let's chat my friends`}
-                id={'1'}
+                id={"1"}
               />
               <ChatRoomCard
                 name="Hùng's room"
                 host="Hùng"
                 desc={`Let's chat my friends`}
-                id={'1'}
+                id={"1"}
               />
               <ChatRoomCard
                 name="Hùng's room"
                 host="Hùng"
                 desc={`Let's chat my friends`}
-                id={'1'}
+                id={"1"}
               />
               <ChatRoomCard
                 name="Hùng's room"
                 host="Hùng"
                 desc={`Let's chat my friends`}
-                id={'1'}
+                id={"1"}
               />
               <ChatRoomCard
                 name="Hùng's room"
                 host="Hùng"
                 desc={`Let's chat my friends`}
-                id={'1'}
+                id={"1"}
               />
               <ChatRoomCard
                 name="Hùng's room"
                 host="Hùng"
                 desc={`Let's chat my friends`}
-                id={'1'}
+                id={"1"}
               />
             </div>
           </ScrollArea>
         </div>
-        <div className="main-content w-4/5 flex items-center justify-center h-[calc(100vh_-_96px)]">
+        <div className="main-content w-4/5 h-[calc(100vh_-_96px)]">
           {content}
         </div>
       </div>

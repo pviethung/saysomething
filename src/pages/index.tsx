@@ -1,5 +1,6 @@
-import { HomeContainer } from '@/components/containers';
-import Head from 'next/head';
+import Head from "next/head";
+
+import { HomeContainer } from "@/components/containers";
 
 export default function Home() {
   return (
