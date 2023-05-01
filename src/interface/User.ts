@@ -1,4 +1,4 @@
-export interface UserMetadata {
+interface UserMetadata {
   avatar_url: string;
   email: string;
   email_verified: boolean;
@@ -6,7 +6,9 @@ export interface UserMetadata {
   name: string;
 }
 
-export interface User {
+interface User {
   id: string;
   user_metadata: UserMetadata;
 }
+
+export type { User, UserMetadata };

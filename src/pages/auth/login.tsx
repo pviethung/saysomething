@@ -1,44 +1,14 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useLocalStorage } from "react-use";
+import dynamic from "next/dynamic";
 
-import { Button } from "@/components/ui";
+const LoginContainer = dynamic(
+  () =>
+    import("@/components/containers").then((module) => module.LoginContainer),
+  {
+    ssr: false,
+  }
+);
 
 const LoginPage = () => {
-  const supabaseClient = useSupabaseClient();
-  const [jwt] = useLocalStorage("jwt", null, {
-    raw: true,
-  });
-  const router = useRouter();
-  const handleLogin = () => {
-    void supabaseClient.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
-      },
-    });
-  };
-
-  useEffect(() => {
-    if (!jwt) {
-      void router.push("/");
-    }
-  }, [jwt]);
-
-  return (
-    <div>
-      <Button
-        onClick={() => {
-          handleLogin();
-        }}
-      >
-        Login
-      </Button>
-    </div>
-  );
+  return <LoginContainer />;
 };
 export default LoginPage;

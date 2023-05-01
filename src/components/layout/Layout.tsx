@@ -1,19 +1,10 @@
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { useRouter } from "next/router";
 
-import Auth from "@/components/Auth";
-import ChatRoomCard from "@/components/ChatRoomCard";
 import { Header } from "@/components/layout";
-import { protectedRoutes } from "@/constants";
+import { ChatRoomCard } from "@/components/room";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { pathname } = useRouter();
-  let content = children;
-  const a = "a";
-
-  if (protectedRoutes.includes(pathname)) {
-    content = <Auth>{children}</Auth>;
-  }
+  const content = children;
 
   return (
     <div className="px-6">

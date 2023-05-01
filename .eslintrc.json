@@ -3,13 +3,20 @@
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "prettier"
+    "plugin:prettier/recommended",
+    "plugin:import/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": true
   },
-  "plugins": ["unused-imports", "@typescript-eslint", "simple-import-sort"],
+  "plugins": [
+    "unused-imports",
+    "@typescript-eslint",
+    "simple-import-sort",
+    "prettier",
+    "import"
+  ],
   "rules": {
     "curly": ["error", "all"],
     "prefer-const": "error",
@@ -27,8 +34,24 @@
       }
     ],
     "@typescript-eslint/no-floating-promises": "error",
+    "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
     "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/exports": "error",
+    "prettier/prettier": "error",
+    "no-console": "error",
+    "import/no-unresolved": "error",
+    "import/exports-last": "error",
+    "import/group-exports": "error"
   },
-  "ignorePatterns": ["*.config.js"]
+  "ignorePatterns": ["lint-staged.config.js"]
+  // "settings": {
+  //   "import/parsers": {
+  //     "@typescript-eslint/parser": [".ts", ".tsx"]
+  //   },
+  //   "import/resolver": {
+  //     "typescript": true,
+  //     "node": true
+  //   }
+  // }
 }

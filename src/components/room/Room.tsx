@@ -1,14 +1,8 @@
-import { useRouter } from "next/router";
-
 import ChatBubble from "@/components/ui/ChatBubble";
 
-const RoomDetailPage = () => {
-  const { pathname } = useRouter();
-
-  console.log(pathname);
-
+const Room = () => {
   return (
-    <div className="home-page">
+    <div className="room">
       <ChatBubble
         fromLoggedUser={true}
         content="It was said that you would, destroy the Sith, not join them."
@@ -21,4 +15,4 @@ I have the high ground."
     </div>
   );
 };
-export default RoomDetailPage;
+export { Room };

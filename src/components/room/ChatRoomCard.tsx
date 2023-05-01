@@ -17,7 +17,7 @@ interface Props {
   desc?: string;
 }
 
-const ChatRoomCard = ({ host, name, desc }: Props) => {
+const ChatRoomCard = ({ host, name, desc, id }: Props) => {
   return (
     <Card>
       <CardHeader>
@@ -30,11 +30,11 @@ const ChatRoomCard = ({ host, name, desc }: Props) => {
         </CardContent>
       )}
       <CardFooter>
-        <Link href={"/roomss"}>
+        <Link href={`/rooms/${id}`}>
           <Button size={"full"}>{`Let's chat`}</Button>
         </Link>
       </CardFooter>
     </Card>
   );
 };
-export default ChatRoomCard;
+export { ChatRoomCard };
